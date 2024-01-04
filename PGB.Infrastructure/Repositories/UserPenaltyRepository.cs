@@ -10,17 +10,17 @@ public class UserPenaltyRepository : IUserPenaltyRepository
     private readonly IDBC _db;
     public UserPenaltyRepository(IDBC db) => _db = db;
 
-    public async Task<int> CountPenaltyAsync(int user_id)
+    public async Task<int> CountPenaltyAsync(int userId)
     {
-        var user = await _db.UserPenalties.FindAsync(user_id);
+        var user = await _db.UserPenalties.FindAsync(userId);
         if (user is null)
             return 0;
         return user.PenaltiesInCurrentTrimester;
     }
 
-    public async Task<bool> IncrementPenaltyAsync(int user_id)
+    public async Task<bool> IncrementPenaltyAsync(int userId)
     {
-        var penalty = await _db.UserPenalties.FindAsync(user_id);
+        var penalty = await _db.UserPenalties.FindAsync(userId);
         penalty.PenaltiesInCurrentTrimester++;
         return true;
     }
@@ -32,9 +32,9 @@ public class UserPenaltyRepository : IUserPenaltyRepository
         return true;
     }
 
-    public async Task<bool> RemovePenaltyAsync(int user_id)
+    public async Task<bool> RemovePenaltyAsync(int userId)
     {
-        var user = await _db.UserPenalties.FirstOrDefaultAsync(u => u.UserId == user_id);
+        var user = await _db.UserPenalties.FirstOrDefaultAsync(u => u.UserId == userId);
 
         if (user is not null)
         {

@@ -12,7 +12,7 @@ public class UserOrderRepository : IUserOrderRepository
 
     public async Task<bool> BlockOrder(int id)
     {
-        var userOrder = await _db.UserOrders.FindAsync(id);
+        var userOrder = await GetAsync(id);
         if (userOrder is not null)
         {
             userOrder.EndDate = DateTime.Now.AddMonths(1);
@@ -30,7 +30,7 @@ public class UserOrderRepository : IUserOrderRepository
     public async Task<int> IncrementOrderBlockAsync(int id)
     {
         int value = 0;
-        var userOrder = await _db.UserOrders.FindAsync(id);
+        var userOrder = await GetAsync(id);
         if (userOrder is not null)
         {
             userOrder.OrdersInCurrentMonth++;

@@ -37,17 +37,16 @@ public class BookOrderRepository : IBookOrderRepository
         return default;
     }
 
-    public async Task<Order> FindLastOrder(int user_id)
+    public async Task<Order> FindLastOrder(int id)
     {
-        var order = await _db.BookOrders.OrderByDescending(o => o.OrderDate).Where(o => o.UserId == user_id).FirstOrDefaultAsync();
+        var order = await _db.BookOrders.OrderByDescending(o => o.OrderDate).Where(o => o.UserId == id).FirstOrDefaultAsync();
         return order;
     }
 
-
-    //I added it just for test !
     public async Task<Order> GetOrderById(int id)
     {
         var order = await _db.BookOrders.FindAsync(id);
-        return order;
+            return order;
+        
     }
 }

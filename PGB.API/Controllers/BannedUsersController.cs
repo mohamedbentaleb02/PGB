@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using PGB.Application.DTOs.Users;
 using PGB.Application.Models.Users.Commands;
 using PGB.Application.Models.Users.Queries;
@@ -9,6 +10,7 @@ namespace PGB.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("fixed")]
     public class BannedUsersController : ControllerBase
     {
         private readonly ISender _mediator;

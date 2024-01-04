@@ -45,7 +45,8 @@ public class BookOrderService : IBookOrderService
     private async Task<bool> IsUserBanned(int userId)
     {
         var bannedUser = await _bannedUserRepository.GetAsync(userId);
-        return bannedUser is not null;
+        if (bannedUser is not null) return true;
+        else return false;
     }
 
     private async Task<bool> RegisterNewUserOrder(Order bookOrder)
@@ -78,6 +79,18 @@ public class BookOrderService : IBookOrderService
         return await _bookOrderRepository.PostAsync(bookOrder);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //I added it just for test !
     public async Task<OrderDTO> GetOrderById(int id)
     {
